@@ -35,6 +35,14 @@ void startup()
     clear();
 }
 
+// FUNCTION FOR GETTING INPUT
+int getInput(char* str)
+{
+    char* buffer;
+    buffer = readline("/> ");
+    if strlen(buffer)!=0
+
+}
 
 
 
