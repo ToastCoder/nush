@@ -1,2 +1,2 @@
-# null-sh
-Null-SH (or) Null Shell is a custom shell for UNIX based Operating System.
+# nush
+NuSH (or) Null Shell is a custom shell for UNIX based Operating Systems.
