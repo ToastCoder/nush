@@ -41,7 +41,7 @@ char next_character(struct source_s *src)
 }
 
 
-char peek_char(struct source_s *src)
+char peek_character(struct source_s *src)
 {
     if(!src || !src->buffer)
     {
@@ -75,8 +75,8 @@ void skip_white_spaces(struct source_s *src)
         return;
     }
 
-    while(((c = peek_char(src)) != EOF) && (c == ' ' || c == '\t'))
+    while(((c = peek_character(src)) != EOF) && (c == ' ' || c == '\t'))
     {
-        next_char(src);
+        next_character(src);
     }
 }

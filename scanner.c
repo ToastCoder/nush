@@ -97,7 +97,7 @@ struct token_s *tokenize(struct source_s *src)
     tok_bufindex     = 0;
     tok_buf[0]       = '\0';
 
-    char nc = next_char(src);
+    char nc = next_character(src);
 
     if(nc == ERRCHAR || nc == EOF)
     {
@@ -119,7 +119,7 @@ struct token_s *tokenize(struct source_s *src)
             case '\n':
                 if(tok_bufindex > 0)
                 {
-                    unget_char(src);
+                    unget_character(src);
                 }
                 else
                 {
@@ -138,7 +138,7 @@ struct token_s *tokenize(struct source_s *src)
             break;
         }
 
-    } while((nc = next_char(src)) != EOF);
+    } while((nc = next_character(src)) != EOF);
 
     if(tok_bufindex == 0)
     {
