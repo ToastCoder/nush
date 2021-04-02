@@ -218,3 +218,22 @@ struct symtab_entry_s *do_lookup(char *str, struct symtab_s *symtable)
 
     return NULL;
 }
+
+struct symtab_entry_s *get_symtab_entry(char *str)
+{
+    int i = symtab_stack.symtab_count-1;
+
+    do
+    {
+        struct symtab_s *symtab = symtab_stack.symtab_list[i];
+        struct symtab_entry_s *entry = do_lookup(str, symtab);
+
+        if(entry)
+        {
+            return entry;
+        }
+
+    } while(--i >= 0);
+
+    return NULL;
+}
