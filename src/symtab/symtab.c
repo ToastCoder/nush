@@ -103,3 +103,52 @@ void dump_local_symtab(void)
     fprintf(stderr, "%*s------ -------------------------------- ------------\r\n", indent, " ");
 }
 
+struct symtab_entry_s *add_to_symtab(char *symbol)
+{
+    if(!symbol || symbol[0] == '\0')
+    {
+        return NULL;
+    }
+
+    struct symtab_s *st = symtab_stack.local_symtab;
+    struct symtab_entry_s *entry = NULL;
+
+    if((entry = do_lookup(symbol, st)))
+    {
+        return entry;
+    }
+
+    entry = malloc(sizeof(struct symtab_entry_s));
+
+    if(!entry)
+    {
+        fprintf(stderr, "fatal error: no memory for new symbol table entry\n");
+        exit(EXIT_FAILURE);
+    }
+
+    memset(entry, 0, sizeof(struct symtab_entry_s));
+    entry->name = malloc(strlen(symbol)+1);
+
+    if(!entry->name)
+    {
+        fprintf(stderr, "fatal error: no memory for new symbol table entry\n");
+        exit(EXIT_FAILURE);
+    }
+
+    strcpy(entry->name, symbol);
+
+    if(!st->first)
+    {
+        st->first      = entry;
+        st->last       = entry;
+    }
+    else
+    {
+        st->last->next = entry;
+        st->last       = entry;
+    }
+
+    return entry;
+}
+
+
