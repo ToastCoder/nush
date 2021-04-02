@@ -45,3 +45,37 @@ struct symtab_s *new_symtab(int level)
     symtab->level = level;
     return symtab;
 }
+
+void free_symtab(struct symtab_s *symtab)
+{
+    if(symtab == NULL)
+    {
+        return;
+    }
+
+    struct symtab_entry_s *entry = symtab->first;
+
+    while(entry)
+    {
+        if(entry->name)
+        {
+            free(entry->name);
+        }
+
+        if(entry->val)
+        {
+            free(entry->val);
+        }
+
+        if(entry->func_body)
+        {
+            free_node_tree(entry->func_body);
+        }
+
+        struct symtab_entry_s *next = entry->next;
+        free(entry);
+        entry = next;
+    }
+
+    free(symtab);
+}
