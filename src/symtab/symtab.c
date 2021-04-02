@@ -198,3 +198,23 @@ int rem_from_symtab(struct symtab_entry_s *entry, struct symtab_s *symtab)
     return res;
 }
 
+struct symtab_entry_s *do_lookup(char *str, struct symtab_s *symtable)
+{
+    if(!str || !symtable)
+    {
+        return NULL;
+    }
+
+    struct symtab_entry_s *entry = symtable->first;
+
+    while(entry)
+    {
+        if(strcmp(entry->name, str) == 0)
+        {
+            return entry;
+        }
+        entry = entry->next;
+    }
+
+    return NULL;
+}
