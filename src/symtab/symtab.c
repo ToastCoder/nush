@@ -237,3 +237,32 @@ struct symtab_entry_s *get_symtab_entry(char *str)
 
     return NULL;
 }
+
+void symtab_entry_setval(struct symtab_entry_s *entry, char *val)
+{
+    if(entry->val)
+    {
+        free(entry->val);
+    }
+
+    if(!val)
+    {
+        entry->val = NULL;
+    }
+    else
+    {
+        char *val2 = malloc(strlen(val)+1);
+
+        if(val2)
+        {
+            strcpy(val2, val);
+        }
+        else
+        {
+            fprintf(stderr, "error: no memory for symbol table entry's value\n");
+        }
+
+        entry->val = val2;
+    }
+}
+
